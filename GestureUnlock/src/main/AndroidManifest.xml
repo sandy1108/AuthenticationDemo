@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pro.wsgh.gestureunlock" />
+    package="pro.wsgh.gestureunlock" >
+    <application>
+        <activity
+            android:name=".GestureUnlockActivity"
+            android:exported="false">
+        </activity>
+    </application>
+</manifest>

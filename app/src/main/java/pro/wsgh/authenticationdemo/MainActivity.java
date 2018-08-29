@@ -18,9 +18,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Button mInitFingerPrint;
     private Button mStartFingerPrint;
-    private TextView mFingerPrintResult;
+    private TextView mVerifyResult;
     private FingerprintIdentify mFingerprintIdentify;
     private AlertDialog mAlertDialog;
+
+    private Button mInitGestureUnlock;
+    private Button mVerifyGestureUnlock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mInitFingerPrint = findViewById(R.id.btn_init_fingerprint);
         mStartFingerPrint = findViewById(R.id.btn_fingerprint);
-        mFingerPrintResult = findViewById(R.id.tv_auth_result);
+        mVerifyResult = findViewById(R.id.tv_auth_result);
+
+        mInitGestureUnlock = findViewById(R.id.btn_init_gesture_unlock);
+        mVerifyGestureUnlock = findViewById(R.id.btn_verify_gesture_unlock);
     }
 
     /**
@@ -66,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Log.i(TAG, "mStartFingerPrint onClick");
-                mFingerPrintResult.setText("等待指纹验证结果");
+                mVerifyResult.setText("等待指纹验证结果");
                 mAlertDialog = new AlertDialog.Builder(MainActivity.this)
                         .setCancelable(true)
                         .setMessage("正在等待验证指纹")
@@ -79,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         .setOnCancelListener(new DialogInterface.OnCancelListener() {
                             @Override
                             public void onCancel(DialogInterface dialog) {
-                                mFingerPrintResult.setText("取消指纹验证");
+                                mVerifyResult.setText("取消指纹验证");
                                 mFingerprintIdentify.cancelIdentify();
                             }
                         })
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onSucceed() {
                         Log.i(TAG, "mFingerprintIdentify onSucceed");
                         mAlertDialog.dismiss();
-                        mFingerPrintResult.setText("指纹验证通过");
+                        mVerifyResult.setText("指纹验证通过");
                         Toast.makeText(MainActivity.this, "onSucceed", Toast.LENGTH_SHORT).show();
                     }
 
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onNotMatch(int availableTimes) {
                         Log.i(TAG, "mFingerprintIdentify onNotMatch, availableTimes: " + availableTimes);
                         mAlertDialog.dismiss();
-                        mFingerPrintResult.setText("指纹验证不通过");
+                        mVerifyResult.setText("指纹验证不通过");
                         Toast.makeText(MainActivity.this, "onNotMatch", Toast.LENGTH_SHORT).show();
                     }
 
@@ -107,10 +113,24 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailed() {
                         Log.i(TAG, "mFingerprintIdentify onFailed");
                         mAlertDialog.dismiss();
-                        mFingerPrintResult.setText("指纹验证错误次数超过上限");
+                        mVerifyResult.setText("指纹验证错误次数超过上限");
                         Toast.makeText(MainActivity.this, "onFailed", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+        // 初始化手势密码事件
+        mInitGestureUnlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //验证手势密码事件
+        mVerifyGestureUnlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
@@ -123,23 +143,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCatchException(Throwable exception) {
                 Log.i(TAG, "initFingerPrint", exception);
-                mFingerPrintResult.setText("指纹验证初始化异常：" + exception.getMessage());
+                mVerifyResult.setText("指纹验证初始化异常：" + exception.getMessage());
             }
         });
         if(!mFingerprintIdentify.isHardwareEnable()){
-            mFingerPrintResult.setText("指纹验证初始化失败：设备硬件不支持指纹识别");
+            mVerifyResult.setText("指纹验证初始化失败：设备硬件不支持指纹识别");
             return;
         }
 
         if(!mFingerprintIdentify.isRegisteredFingerprint()){
-            mFingerPrintResult.setText("指纹验证初始化失败：未注册指纹");
+            mVerifyResult.setText("指纹验证初始化失败：未注册指纹");
             return;
         }
 
         if(!mFingerprintIdentify.isFingerprintEnable()){
-            mFingerPrintResult.setText("指纹验证初始化失败：指纹识别不可用");
+            mVerifyResult.setText("指纹验证初始化失败：指纹识别不可用");
             return;
         }
-        mFingerPrintResult.setText("指纹验证初始化正常");
+        mVerifyResult.setText("指纹验证初始化正常");
     }
 }
