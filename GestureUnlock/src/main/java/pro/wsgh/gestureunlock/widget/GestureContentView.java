@@ -48,6 +48,7 @@ public class GestureContentView extends FrameLayout {
         blockWidth = screenDisplay[0]/4;
         this.list = new ArrayList<GesturePoint>();
         this.context = context;
+        // 小圆圈大小计算
         circleWidth = blockWidth - 2 * blockWidth/baseNum;
         // 添加9个图标
         addChild(data);

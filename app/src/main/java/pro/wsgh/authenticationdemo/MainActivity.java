@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import pro.wsgh.fingerprintidentify.FingerprintIdentify;
 import pro.wsgh.fingerprintidentify.base.BaseFingerprint;
+import pro.wsgh.gestureunlock.GestureUnlock;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -123,14 +124,16 @@ public class MainActivity extends AppCompatActivity {
         mInitGestureUnlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                GestureUnlock.getInstance().init(MainActivity.this.getApplicationContext());
+                GestureUnlock.getInstance().createGestureUnlock(MainActivity.this);
             }
         });
         //验证手势密码事件
         mVerifyGestureUnlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                GestureUnlock.getInstance().init(MainActivity.this.getApplicationContext());
+                GestureUnlock.getInstance().verifyGestureUnlock(MainActivity.this);
             }
         });
     }

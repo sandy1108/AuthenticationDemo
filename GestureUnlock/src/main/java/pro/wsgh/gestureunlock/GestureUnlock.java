@@ -1,5 +1,6 @@
 package pro.wsgh.gestureunlock;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -25,13 +26,22 @@ public class GestureUnlock {
      * 初始化配置
      *
      * @param applicationContext
-     * @param config
      */
-    public void initConfig(Context applicationContext, ConfigGestureVO config){
+    public void init(Context applicationContext){
+        ResourceUtil.init(applicationContext);
     }
 
     public void createGestureUnlock(Context activityContext){
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(activityContext, GestureUnlockActivity.class));
+        intent.putExtra("type", "create");
+        activityContext.startActivity(intent);
+    }
 
-        activityContext.startActivity(new Intent());
+    public void verifyGestureUnlock(Context activityContext){
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(activityContext, GestureUnlockActivity.class));
+        intent.putExtra("type", "verify");
+        activityContext.startActivity(intent);
     }
 }

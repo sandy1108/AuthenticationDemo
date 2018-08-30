@@ -38,7 +38,7 @@ public class CircleImageView extends AppCompatImageView {
         this.errorColor = errorColor;
         this.currentColor = normalColor;
         this.blockWidth = width;
-        this.radius = blockWidth / 3;
+        this.radius = blockWidth / 2;
         this.isShowTrack = isShowTrack;
     }
 

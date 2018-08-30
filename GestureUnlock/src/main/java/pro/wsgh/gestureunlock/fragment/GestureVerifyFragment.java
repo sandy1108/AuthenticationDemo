@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import pro.wsgh.gestureunlock.EUExGestureUnlock.GestureVerifyListener;
 import pro.wsgh.gestureunlock.JsConst;
 import pro.wsgh.gestureunlock.util.GestureUtil;
 import pro.wsgh.gestureunlock.util.ResourceUtil;
