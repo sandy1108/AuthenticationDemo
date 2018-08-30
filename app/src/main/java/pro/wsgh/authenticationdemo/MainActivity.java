@@ -39,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (mFingerprintIdentify !=null){
+            mFingerprintIdentify.cancelIdentify();
+        }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (mFingerprintIdentify !=null){
+            mFingerprintIdentify.resumeIdentify();
+        }
     }
 
     /**
