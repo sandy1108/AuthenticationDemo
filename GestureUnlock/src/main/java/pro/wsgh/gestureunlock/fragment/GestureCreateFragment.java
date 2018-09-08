@@ -83,7 +83,9 @@ public class GestureCreateFragment extends GestureBaseFragment implements OnClic
                     new GestureDrawLine.GestureCallBack() {
                 @Override
                 public void onGestureCodeInput(final String inputCode) {
+                    // 收到输入的手势密码code
                     if (!isInputPassValidate(inputCode)) {
+                        // 输入手势密码不合法
                         setTextTipError(String.format(mData.getCodeLengthErrorPrompt(),
                                 mData.getMinimumCodeLength()));
                         mGestureContentView.clearDrawlineState(mData.getErrorRemainInterval(), true);
@@ -91,6 +93,7 @@ public class GestureCreateFragment extends GestureBaseFragment implements OnClic
                         return;
                     }
                     if (mIsFirstInput) {
+                        // 第一次输入
                         mFirstPassword = inputCode;
                         updateCodeList(inputCode);
                         mGestureContentView.clearDrawlineState(mData.getSuccessRemainInterval(), false);
@@ -99,7 +102,9 @@ public class GestureCreateFragment extends GestureBaseFragment implements OnClic
                         mTextReset.setText(mData.getRestartCreationButtonTitle());
                         mGestureCreateListener.onEventOccur(JsConst.EVENT_SECOND_INPUT);
                     } else {
+                        // 第二次输入验证
                         if (inputCode.equals(mFirstPassword)) {
+                            // 两次相同
                             mGestureContentView.clearDrawlineState(mData.getSuccessRemainInterval(), false);
                             setTextTipNormal(mData.getCreationSucceedPrompt());
                             new Handler().postDelayed(new Runnable() {
@@ -112,6 +117,7 @@ public class GestureCreateFragment extends GestureBaseFragment implements OnClic
                                 }
                             }, mData.getSuccessRemainInterval());
                         } else {
+                            // 两次不同
                             mGestureCreateListener.onEventOccur(JsConst.EVENT_NOT_SAME);
                             setTextTipError(mData.getCheckErrorPrompt());
                             // 左右移动动画

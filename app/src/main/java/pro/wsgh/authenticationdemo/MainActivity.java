@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         if (mFingerprintIdentify !=null){
             mFingerprintIdentify.resumeIdentify();
         }
+//        GestureUnlock.getInstance().init(MainActivity.this.getApplicationContext());
+//        GestureUnlock.getInstance().verifyGestureUnlock(MainActivity.this);
     }
 
     /**
