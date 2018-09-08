@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import pro.wsgh.fingerprintidentify.FingerprintIdentify;
 import pro.wsgh.fingerprintidentify.base.BaseFingerprint;
-import pro.wsgh.gestureunlock.GestureUnlock;
 
 public class MainActivity extends AppCompatActivity {
 

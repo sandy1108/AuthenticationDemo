@@ -1,4 +1,4 @@
-package pro.wsgh.gestureunlock;
+package pro.wsgh.authenticationdemo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,7 +37,7 @@ public class GestureUnlockActivity extends FragmentActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gesture_unlock);
+        setContentView(pro.wsgh.gestureunlock.R.layout.activity_gesture_unlock);
         try {
             Intent intent = getIntent();
             String type = intent.getStringExtra("type");
@@ -68,22 +68,23 @@ public class GestureUnlockActivity extends FragmentActivity{
 
                 @Override
                 public void onCreateFinished(String gestureCode) {
-
+                    // 创建手势密码完成
+                    GestureUnlock.getInstance().setGestureCode(GestureUnlockActivity.this, gestureCode);
                 }
 
                 @Override
                 public void onCreateFailed(ResultVerifyVO result) {
-
+                    // 创建手势密码失败
                 }
 
                 @Override
                 public void closeLayout() {
-
+                    // 关闭
                 }
 
                 @Override
                 public void onCancel() {
-
+                    // 取消创建手势密码
                 }
 
                 @Override
@@ -93,7 +94,7 @@ public class GestureUnlockActivity extends FragmentActivity{
             });
         }
         mGestureCreateFragment.setData(ConfigGestureVO.defaultConfig());
-        safeAddFragment(mGestureCreateFragment, R.id.fragment_container, "GestureCreateFragment");
+        safeAddFragment(mGestureCreateFragment, pro.wsgh.gestureunlock.R.id.fragment_container, "GestureCreateFragment");
     }
 
     /**
@@ -130,7 +131,7 @@ public class GestureUnlockActivity extends FragmentActivity{
             });
         }
         mGestureVerifyFragment.setData(ConfigGestureVO.defaultConfig());
-        safeAddFragment(mGestureVerifyFragment, R.id.fragment_container, "GestureVerifyFragment");
+        safeAddFragment(mGestureVerifyFragment, pro.wsgh.gestureunlock.R.id.fragment_container, "GestureVerifyFragment");
     }
 
     /**
